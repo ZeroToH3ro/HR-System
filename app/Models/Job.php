@@ -33,7 +33,7 @@ class Job extends Model
         if(!empty(Request::get('start_date')) && !empty(Request::get('end_date'))) {
             $records = $records->where('jobs.created_at', '>=', Request::get('start_date'))->where('jobs.created_at', '<=', Request::get('end_date'));
         }
-
+    
 
         $records = $records
             ->orderBy('id', 'desc')

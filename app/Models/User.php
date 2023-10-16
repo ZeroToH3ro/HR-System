@@ -67,4 +67,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Job::class, "job_id");
     }
+
+    public function get_department_single(){
+        return $this->belongsTo(Department::class, "department_id");
+    }
 }

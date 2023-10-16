@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\DepartmentExport;
 use App\Models\Department;
 use App\Models\Location;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -19,6 +20,8 @@ class DepartmentController extends Controller
     public function add()
     {
         $data['getLocations'] = Location::get();
+        $data['getManagers'] = Manager::get();
+        
         return view('departments.add', $data);
     }
 
