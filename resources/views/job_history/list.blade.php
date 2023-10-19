@@ -94,11 +94,7 @@
                                             <td>{{ date('d-m-Y H:i A', strtotime($item->start_date)) }}</td>
                                             <td>{{ date('d-m-Y H:i A', strtotime($item->end_date)) }}</td>
                                             <td>
-                                                @if (!empty($item->department_id == 1))
-                                                    Developer Department
-                                                @else
-                                                    BDM Department
-                                                @endif
+                                                {{ !empty($item->get_department_single->department_name) ? $item->get_department_single->department_name : '' }}
                                             </td>
                                             <td>{{ !empty($item->get_job_single->job_title) ?  $item->get_job_single->job_title : '' }}</td>
                                             <td>{{ date('d-m-Y H:i A', strtotime($item->created_at)) }}</td>

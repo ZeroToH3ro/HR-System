@@ -45,8 +45,9 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" name="manager_id">
                                             <option value="">Select Manager Name</option>
-                                            <option value="1">Elon Musk</option>
-                                            <option value="2">Bill Gates</option>
+                                            @foreach ($getManagers as $item)
+                                                <option value="{{ $item->id }}">{{ $item->manger_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

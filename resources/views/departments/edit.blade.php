@@ -45,8 +45,9 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" name="manager_id">
                                             <option value="">Select Manager Name</option>
-                                            <option {{ ($getRecord->manager_id == 1) ? 'selected' : '' }}  value="1">Elon Musk</option>
-                                            <option {{ ($getRecord->manager_id == 2) ? 'selected' : '' }}  value="2">Bill Gate</option>
+                                            @foreach ($getManagers as $item)
+                                                <option {{ ($item->id == $getRecord->manager_id) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->manger_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

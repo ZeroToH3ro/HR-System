@@ -7,6 +7,7 @@ use App\Models\Manager;
 use App\Models\User;
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class EmployeesController extends Controller
 {
@@ -21,7 +22,7 @@ class EmployeesController extends Controller
         $data['getJobs'] = Job::get();
         $data['getManagers'] = Manager::get();
         $data['getDepartments'] = Department::get();
-        
+
         return view('employees.add', $data);
     }
 
@@ -51,26 +52,40 @@ class EmployeesController extends Controller
         $user->job_id = trim($request->job_id);
         $user->is_role = 0;
 
+        if (!empty($request->file('profile_image'))) {
+            $file = $request->file('profile_image');
+            $randomStr = Str::random(30);
+            $fileName = $randomStr . '.' . $file->getClientOriginalExtension();
+            $destinationPath = public_path('images/profile');
+            $file->move($destinationPath, $fileName);
+            $user->profile_image = $fileName;
+        }
+
         $user->save();
         return redirect('admin/employees')->with('success', 'Employees successfully register');
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         $data['getRecord'] = User::find($id);
 
         return view('employees.view', $data);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $data['getRecord'] = User::find($id);
         $data['getJobs'] = Job::get();
+        $data['getManagers'] = Manager::get();
+        $data['getDepartments'] = Department::get();
 
         return view('employees.edit', $data);
     }
 
-    public function edit_post($id, Request $request) {
+    public function edit_post($id, Request $request)
+    {
         $user = request()->validate([
-            'email' => 'required|unique:users,email,'.$id
+            'email' => 'required|unique:users,email,' . $id
         ]);
 
         $user = User::find($id);
@@ -84,13 +99,30 @@ class EmployeesController extends Controller
         $user->manager_id = trim($request->manager_id);
         $user->department_id = trim($request->department_id);
         $user->job_id = trim($request->job_id);
-        $user->is_role = 0;
+        if ($user->is_role == 1) {
+            $user->is_role = 1;
+        } else {
+            $user->is_role = 0;
+        }
+
+        if (!empty($request->file('profile_image'))) {
+            if (!empty($user->profile_image) && file_exists(public_path('images/profile/' . $user->profile_image))) {
+                unlink('images/profile/' . $user->profile_image);
+            }
+            $file = $request->file('profile_image');
+            $randomStr = Str::random(30);
+            $fileName = $randomStr . '.' . $file->getClientOriginalExtension();
+            $destinationPath = public_path('images/profile');
+            $file->move($destinationPath, $fileName);
+            $user->profile_image = $fileName;
+        }
 
         $user->save();
         return redirect('admin/employees')->with('success', 'Employees successfully update');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $user = User::find($id);
         $user->delete();
         return redirect()->back()->with('error', 'Record Successfully Delete');

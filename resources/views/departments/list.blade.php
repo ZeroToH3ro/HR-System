@@ -11,16 +11,6 @@
             <h1 class="m-0">Departments</h1>
           </div><!-- /.col -->
           <div class="col-sm-6" style="text-align: right;">
-            <ol class="breadcrumb float-sm-right">
-
-                <form action="{{ url('admin/department_export') }}" method="get">
-                    <input type="hidden" name="start_date" value="{{ Request()->start_date }}">
-                    <input type="hidden" name="end_date" value="{{ Request()->end_date }}">
-                    <a href="{{ url('admin/departments_export?start_date='.Request::get('start_date').'&end_date='.Request::get('end_date')) }}" class="btn btn-info mb-1">Export Excel</a>
-                </form>
-
-                <a href="{{ url('admin/departments/add') }}" class="btn btn-primary mb-2 ml-1">Add New Department</a>
-            </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -48,6 +38,11 @@
 
                     <div class="form-group col-md-3">
                         <label>Location Name</label>
+                        <input type="text" name="street_address" class="form-control" value="{{ Request()->street_address }}">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Manager Name</label>
                         <input type="text" name="street_address" class="form-control" value="{{ Request()->street_address }}">
                     </div>
 
@@ -95,11 +90,7 @@
                         <td>{{ $value->department_name }}</td>
                         <td>{{ $value->street_address }}</td>
                         <td>
-                            @if ($value->manager_id == 1)
-                                Elon Musk
-                            @else
-                                Bill Gate
-                            @endif
+                            {{ $value->manger_name }}
                         </td>
                         <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                         <td>

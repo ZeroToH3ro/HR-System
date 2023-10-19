@@ -65,11 +65,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Department Name<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        @if (!empty($getRecords->department_id == 1))
-                                            Developer Department
-                                        @else
-                                            BDM Department
-                                        @endif
+                                        {{ !empty($getRecords->get_department_single->department_name) ? $getRecords->get_department_single->department_name : ' '}}
                                     </div>
                                 </div>
                             </div>

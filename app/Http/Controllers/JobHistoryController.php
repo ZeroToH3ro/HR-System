@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\JobHistoryExport;
+use App\Models\Department;
 use App\Models\Job;
 use App\Models\Job_History;
 use App\Models\User;
@@ -23,6 +24,7 @@ class JobHistoryController extends Controller
     {
         $data['getJobs'] = Job::get();
         $data['getEmployees'] = User::where('is_role', '=', 0)->get();
+        $data['getDepartments'] = Department::get();
 
         return view('job_history.add', $data);
     }
@@ -60,7 +62,8 @@ class JobHistoryController extends Controller
         $data['getRecords'] = Job_History::find($id);
         $data['getJobs'] = Job::get();
         $data['getEmployees'] = User::where('is_role', '=', 0)->get();
-
+        $data['getDepartments'] = Department::get();
+        
         return view('job_history.edit', $data);
     }
 

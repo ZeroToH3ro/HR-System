@@ -30,12 +30,6 @@ class JobHistoryExport implements FromCollection, ShouldAutosize, WithHeadings, 
         $startDate = date('d-m-Y', strtotime($jobHistory->start_date));
         $endDate = date('d-m-Y', strtotime($jobHistory->end_date));
 
-        if ($jobHistory->department_id == 1) {
-            $department = 'Developer Department';
-        } else {
-            $department = 'BDM Department';
-        }
-
         return [
             ++$this->index,
             $jobHistory->id,
@@ -43,7 +37,7 @@ class JobHistoryExport implements FromCollection, ShouldAutosize, WithHeadings, 
             $jobHistory->job_title,
             $startDate,
             $endDate,
-            $department,
+            $jobHistory->department_name,
             $createdAtFormat
         ];
     }

@@ -100,6 +100,17 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Image Profile<span style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        @if (!empty($getRecord->profile_image))
+                                            @if (file_exists(public_path('images/profile/'.$getRecord->profile_image)))
+                                                <img src="{{ asset('images/profile/'.$getRecord->profile_image) }}" style="width: 80px; height:80px" alt="avatar">
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Manager Name <span style="color: red">*</span></label>
                                     <div class="col-sm-10">
                                         <select name="manager_id" class="form-control" required>

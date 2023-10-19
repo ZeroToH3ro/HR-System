@@ -102,16 +102,23 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Commission PCT</label>
+                                    <div class="col-sm-10">
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Manager Name</label>
                                     <div class="col-sm-10">
-                                        {{ $getRecord->manager_id }}
+                                        {{ !empty($getRecord->get_manager_single->manger_name) ? $getRecord->get_manager_single->manger_name : '' }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Department Name</label>
                                     <div class="col-sm-10">
-                                        {{ $getRecord->department_id }}
+                                        {{ !empty($getRecord->get_department_single->department_name) ? $getRecord->get_department_single->department_name : '' }}
                                     </div>
                                 </div>
 

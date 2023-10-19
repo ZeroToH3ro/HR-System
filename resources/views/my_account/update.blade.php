@@ -50,6 +50,18 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable"> Profile Image</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" name="profile_image" class="form-control" >
+                                        @if (!empty($getRecord->profile_image))
+                                            @if (file_exists(public_path('images/profile/'.$getRecord->profile_image)))
+                                                <img src="{{ asset('images/profile/'.$getRecord->profile_image) }}" style="width: 80px; height:80px" alt="avatar">
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable"> Password <span style="color: red">*</span></label>
                                     <div class="col-sm-10">
                                         <input type="text" name="password" class="form-control">

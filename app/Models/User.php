@@ -50,10 +50,10 @@ class User extends Authenticatable
         if (!empty(Request::get('id'))) {
             $records = $records->where('id', '=', Request::get('id'));
         }
-        if(!empty(Request::get('name'))) {
+        if (!empty(Request::get('name'))) {
             $records = $records->where('name', 'like', '%' . Request::get('name') . '%');
         }
-        if(!empty(Request::get('last_name'))) {
+        if (!empty(Request::get('last_name'))) {
             $records = $records->where('last_name', 'like', '%' . Request::get('last_name') . '%');
         }
 
@@ -66,5 +66,15 @@ class User extends Authenticatable
     public function get_job_single()
     {
         return $this->belongsTo(Job::class, "job_id");
+    }
+
+    public function get_department_single()
+    {
+        return $this->belongsTo(Department::class, "department_id");
+    }
+
+    public function get_manager_single()
+    {
+        return $this->belongsTo(Manager::class, "manager_id");
     }
 }

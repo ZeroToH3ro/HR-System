@@ -117,12 +117,27 @@
 
                             <div class="card-body">
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Image Profile<span style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="file" name="profile_image"  class="form-control">
+                                        @if (!empty($getRecord->profile_image))
+                                            @if (file_exists(public_path('images/profile/'.$getRecord->profile_image)))
+                                                <img src="{{ asset('images/profile/'.$getRecord->profile_image) }}" style="width: 80px; height:80px" alt="avatar">
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Manager Name <span style="color: red">*</span></label>
                                     <div class="col-sm-10">
                                         <select name="manager_id" class="form-control" required>
                                             <option value="">Manager Name</option>
-                                            <option {{ $getRecord->manager_id == 1 ? 'selected' : '' }} value="1">Elon Musk</option>
-                                            <option {{ $getRecord->manager_id == 2 ? 'selected' : '' }} value="2">Bill Gates</option>
+                                            @foreach ($getManagers as $item)
+                                                <option {{ ($getRecord->manager_id == $item->id) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->manger_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -134,8 +149,9 @@
                                     <div class="col-sm-10">
                                         <select name="department_id" class="form-control" required>
                                             <option value="">Department Name</option>
-                                            <option {{ $getRecord->department_id == 1 ? 'selected' : '' }} value="1">Developer Department</option>
-                                            <option {{ $getRecord->department_id == 2 ? 'selected' : '' }} value="2">BDM Department</option>
+                                            @foreach ($getDepartments as $item)
+                                                <option {{ ($getRecord->department_id == $item->id) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->department_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

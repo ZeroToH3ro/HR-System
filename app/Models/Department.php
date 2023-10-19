@@ -13,8 +13,9 @@ class Department extends Model
 
     static public function getRecords($request)
     {
-        $data = self::select('departments.*', 'locations.street_address')
+        $data = self::select('departments.*', 'locations.street_address', 'managers.manger_name')
             ->join('locations', 'locations.id', '=', 'departments.locations_id')
+            ->join('managers', 'managers.id', '=', 'departments.manager_id')
             ->orderBy('departments.id', 'desc');
 
         if (!empty(Request::get('id'))) {
@@ -40,7 +41,7 @@ class Department extends Model
         if (!empty(Request::get('start_date')) && !empty(Request::get('end_date'))) {
             $data = $data->where('departments.created_at', '>=', Request::get('start_date'))->where('departments.created_at', '<=', Request::get('end_date'));
         }
-        
+
         $data = $data->paginate(5);
         return $data;
     }

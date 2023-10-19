@@ -26,18 +26,13 @@ class DepartmentExport implements FromCollection, ShouldAutosize, WithHeadings, 
     public function map($department): array
     {
         $createdAtFormat = date('d-m-Y', strtotime($department->created_at));
-        if ($department->manager_id == 1) {
-            $managerName = 'Elon Musk';
-        } else {
-            $managerName = 'Bill Gate';
-        }
 
         return [
             ++$this->index,
             $department->id,
             $department->department_name,
             $department->street_address,
-            $managerName,
+            $department->manager_name,
             $createdAtFormat
         ];
     }

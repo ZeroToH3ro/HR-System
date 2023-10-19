@@ -76,8 +76,9 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" name="department_id">
                                             <option value="">Select Department Name</option>
-                                            <option value="1">Developer Department</option>
-                                            <option value="2">BDM Department</option>
+                                            @foreach ($getDepartments as $item)
+                                                <option value="{{ $item->id }}">{{ $item->department_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

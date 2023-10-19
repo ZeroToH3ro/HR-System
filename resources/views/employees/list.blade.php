@@ -68,6 +68,7 @@
                                         <th>Last Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
+                                        <th>Image Profile</th>
                                         <th>Role</th>
                                         <th>Action</th>
                                     </tr>
@@ -80,6 +81,13 @@
                                         <td>{{ $value->last_name }}</td>
                                         <td>{{ $value->email  }}</td>
                                         <td>{{ $value->phone_number }}</td>
+                                        <td>
+                                            @if (!empty($value->profile_image))
+                                                @if (file_exists(public_path('images/profile/'.$value->profile_image)))
+                                                    <img src="{{ asset('images/profile/'.$value->profile_image) }}" style="width: 80px; height:80px" alt="avatar">
+                                                @endif
+                                            @endif
+                                        </td>
                                         <td>{{ !empty($value->is_role) ? 'HR' : 'Employee' }}</td>
                                         <td>
                                             <a href="{{ url('admin/employees/view/'.$value->id) }}" class="btn btn-info">View</a>

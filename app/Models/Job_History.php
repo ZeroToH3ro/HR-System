@@ -17,9 +17,10 @@ class Job_History extends Model
 
     static public function getRecords($request)
     {
-        $data = self::select('job__histories.*', 'users.name', 'users.last_name', 'jobs.job_title')
+        $data = self::select('job__histories.*', 'users.name', 'users.last_name', 'jobs.job_title', 'departments.department_name')
             ->join('users', 'users.id', '=', 'job__histories.employee_id')
             ->join('jobs', 'jobs.id', '=', 'job__histories.job_id')
+            ->join('departments', 'departments.id', '=', 'job__histories.department_id')
             ->orderBy('job__histories.id', 'desc');
 
         if (!empty(Request::get('id'))) {
@@ -58,5 +59,10 @@ class Job_History extends Model
     public function get_job_single()
     {
         return $this->belongsTo(Job::class, "job_id");
+    }
+
+    public function get_department_single()
+    {
+        return $this->belongsTo(Department::class, "department_id");
     }
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class MyAccountController extends Controller
 {
@@ -27,6 +28,18 @@ class MyAccountController extends Controller
 
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);
+        }
+
+        if(!empty($request->file('profile_image'))){
+            if(!empty($user->profile_image) && file_exists(public_path('images/profile'.$user->profile_image))) {
+                unlink('images/profile/'.$user->profile_image);
+            }
+            $file = $request->file('profile_image');
+            $randomStr = Str::random(30);
+            $fileName = $randomStr . '.' . $file->getClientOriginalExtension();
+            $destinationPath = public_path('images/profile');
+            $file->move($destinationPath, $fileName);
+            $user->profile_image = $fileName;
         }
         $user->save();
 
