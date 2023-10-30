@@ -49,10 +49,18 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-lable">Email <span style="color: red">*</span></label>
+                                    <label class="col-sm-2 col-form-lable">Email<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
                                         <input type="email" value="{{ old('email') }}" name="email" class="form-control" required placeholder="Enter Email">
                                         <span style="color: red">{{ $errors->first('email') }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Password<span style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="password" value="{{ old('password') }}" name="password" class="form-control" required placeholder="Enter Password">
+                                        <span style="color: red">{{ $errors->first('password') }}</span>
                                     </div>
                                 </div>
 

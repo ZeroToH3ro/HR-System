@@ -131,4 +131,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('admin/position_export', [PositionController::class, 'position_export']);
 });
 
+
+Route::group(['middleware' => 'employee'], function () {
+    Route::get('employee/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('employee/my_account', [MyAccountController::class, 'profile']);
+    Route::post('employee/my_account', [MyAccountController::class, 'profile_update']);
+});
 Route::get('logout', [AuthController::class, 'logout']);

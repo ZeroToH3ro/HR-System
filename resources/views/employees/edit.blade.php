@@ -64,6 +64,17 @@
 
                             <div class="card-body">
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable"> Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="password" class="form-control">
+                                        (Leave blank, if you are not changing password)
+                                        <span style="color: red;">{{ $errors->first('password') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Phone Number</label>
                                     <div class="col-sm-10">
                                         <input type="number" value="{{ $getRecord->phone_number }}" name="phone_number" class="form-control" placeholder="Enter Phone Number">
@@ -125,6 +136,20 @@
                                                 <img src="{{ asset('images/profile/'.$getRecord->profile_image) }}" style="width: 80px; height:80px" alt="avatar">
                                             @endif
                                         @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Position<span style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select name="position_id" class="form-control" required>
+                                            <option value="">Position Name</option>
+                                            @foreach ($getPositions as $item)
+                                                <option {{ ($getRecord->position_id == $item->id) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->position_name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

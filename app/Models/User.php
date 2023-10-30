@@ -77,4 +77,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Manager::class, "manager_id");
     }
+
+    public function get_position_single()
+    {
+        return $this->belongsTo(Position::class, "position_id");
+    }
 }

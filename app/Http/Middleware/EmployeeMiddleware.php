@@ -5,13 +5,12 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-
-class AdminMiddleware
+class EmployeeMiddleware
 {
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::User()->is_role == '1') {
+            if (Auth::User()->is_role == '0') {
                 return $next($request);
             } else {
                 Auth::logout();

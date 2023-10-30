@@ -8,6 +8,7 @@ use App\Models\Position;
 use App\Models\User;
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class EmployeesController extends Controller
@@ -33,6 +34,7 @@ class EmployeesController extends Controller
         $user = request()->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            'password' => 'required',
             'hire_date' => 'required',
             'job_id' => 'required',
             'salary' => 'required',
@@ -47,6 +49,7 @@ class EmployeesController extends Controller
         $user->last_name = trim($request->last_name);
         $user->phone_number = trim($request->phone_number);
         $user->email = trim($request->email);
+        $user->password = Hash::make($request->password);
         $user->hire_date = trim($request->hire_date);
         $user->salary = trim($request->salary);
         $user->commission_pct = trim($request->commission_pct);
@@ -109,6 +112,10 @@ class EmployeesController extends Controller
         $user->job_id = trim($request->job_id);
         $user->position_id = trim($request->position_id);
 
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+
         if ($user->is_role == 1) {
             $user->is_role = 1;
         } else {
@@ -135,6 +142,7 @@ class EmployeesController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+
         return redirect()->back()->with('error', 'Record Successfully Delete');
     }
 }

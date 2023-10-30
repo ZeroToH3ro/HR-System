@@ -66,6 +66,8 @@
                                     </div>
                                 </div>
 
+
+
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Phone Number</label>
                                     <div class="col-sm-10">
@@ -102,9 +104,20 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-lable">Commission PCT</label>
+                                    <label class="col-sm-2 col-form-lable">Image Profile</label>
                                     <div class="col-sm-10">
-                                        
+                                        @if (!empty($getRecord->profile_image))
+                                            @if (file_exists(public_path('images/profile/'.$getRecord->profile_image)))
+                                                <img src="{{ asset('images/profile/'.$getRecord->profile_image) }}" style="width: 80px; height:80px" alt="avatar">
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Position</label>
+                                    <div class="col-sm-10">
+                                        {{ !empty($getRecord->get_position_single->position_name) ? $getRecord->get_position_single->position_name : ' ' }}
                                     </div>
                                 </div>
 

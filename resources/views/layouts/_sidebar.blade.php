@@ -2,7 +2,6 @@
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
   </div>
-
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -52,6 +51,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+            @if (Auth::User()->is_role == '1')
           <li class="nav-item">
             <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -169,9 +169,28 @@
             </a>
           </li>
 
+    @endif
 
-        </ul>
-      </nav>
+    @if (Auth::User()->is_role == '0')
+    <li class="nav-item">
+        <a href="{{ url('employee/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Dashboard
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('employee/my_account') }}" class="nav-link @if(Request::segment(2) == 'my_account') active @endif">
+          <i class="nav-icon fa fa-cog"></i>
+          <p>
+            Account
+          </p>
+        </a>
+      </li>
+    @endif
+    </ul>
+    </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
