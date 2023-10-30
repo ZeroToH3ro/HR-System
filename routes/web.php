@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PositionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MyAccountController;
+use App\Http\Controllers\PayrollController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +112,23 @@ Route::group(['middleware' => ['admin']], function () {
     //Account
     Route::get('admin/my_account', [MyAccountController::class, 'my_account']);
     Route::post('admin/my_account', [MyAccountController::class, 'update']);
+    //Payroll
+    Route::get('admin/payroll', [PayrollController::class, 'index']);
+    Route::get('admin/payroll/add', [PayrollController::class, 'add']);
+    Route::post('admin/payroll/add', [PayrollController::class, 'add_post']);
+    Route::get('admin/payroll/{id}', [PayrollController::class, 'view']);
+    Route::get('admin/payroll/edit/{id}', [PayrollController::class, 'edit']);
+    Route::post('admin/payroll/edit/{id}', [PayrollController::class, 'edit_post']);
+    Route::get('admin/payroll/delete/{id}', [PayrollController::class, 'delete']);
+    Route::get('admin/payroll_export', [PayrollController::class, 'payroll_export']);
+    //Position
+    Route::get('admin/position', [PositionController::class, 'index']);
+    Route::get('admin/position/add', [PositionController::class, 'add']);
+    Route::post('admin/position/add', [PositionController::class, 'add_post']);
+    Route::get('admin/position/edit/{id}', [PositionController::class, 'edit']);
+    Route::post('admin/position/edit/{id}', [PositionController::class, 'edit_post']);
+    Route::get('admin/position/delete/{id}', [PositionController::class, 'delete']);
+    Route::get('admin/position_export', [PositionController::class, 'position_export']);
 });
 
 Route::get('logout', [AuthController::class, 'logout']);

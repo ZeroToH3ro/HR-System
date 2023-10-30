@@ -12,7 +12,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Add</a></li>
+              <li class="breadcrumb-item"><a href="#">View</a></li>
               <li class="breadcrumb-item active">Payroll</li>
             </ol>
           </div><!-- /.col -->
@@ -27,112 +27,105 @@
                 <div class="col-md-12">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Add Payrolls</h3>
+                            <h3 class="card-title">View Payrolls</h3>
                         </div>
 
-                        <form class="form-horizontal" accept="{{ url('admin/payroll/add') }}" enctype="multipart/form-data" method="post">
-                            {{ csrf_field() }}
+                        <form class="form-horizontal" action="" method="get">
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Employement Name:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <select name="employee_id" class="form-control" required>
-                                            <option value="">Employement Name</option>
-                                            @foreach ($getEmployees as $item)
-                                                <option value="{{ $item->id }}"> {{ $item->name }} </option>
-                                            @endforeach
-                                        </select>
+                                        {{ $payroll->get_single_employee->name }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Number of day works:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="number_of_day_work" value="{{ old('number_of_day_work') }}" class="form-control" required placeholder="Enter The Number Of Day Work:">
+                                        {{ $payroll->number_of_day_work }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Bonus:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="bonus" value="{{ old('bonus') }}" class="form-control" required placeholder="Enter Bonus:">
+                                       {{ $payroll->bonus }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Overtime:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="overtime" value="{{ old('overtime') }}" class="form-control" required placeholder="Enter Overtime:">
+                                        {{ $payroll->overtime }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Gross Salary:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="gross_salary" value="{{ old('gross_salary') }}" class="form-control" required placeholder="Enter Gross Salary:">
+                                        {{ $payroll->gross_salary }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Cash Advance:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="cash_advance" value="{{ old('cash_advance') }}" class="form-control" required placeholder="Enter Cash Advance:">
+                                        {{ $payroll->cash_advance }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Later Hour:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="late_hours" value="{{ old('late_hours') }}" class="form-control" required placeholder="Enter Later Hour:">
+                                        {{ $payroll->late_hours }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Absent Day:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="absent_days" value="{{ old('absent_days') }}" class="form-control" required placeholder="Enter Absent Day:">
+                                        {{ $payroll->absent_days }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">SSS Contribution:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="sss_contribution" value="{{ old('sss_contribution') }}" class="form-control" required placeholder="Enter SSS Contribute:">
+                                        {{ $payroll->sss_contribution }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Phil Health:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="philhealth" value="{{ old('philhealth') }}" class="form-control" required placeholder="Enter Phil Health:">
+                                        {{ $payroll->philhealth }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Total Deduction:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="total_deductions" value="{{ old('total_deductions') }}" class="form-control" required placeholder="Enter Total Deduction:">
+                                        {{ $payroll->total_deductions }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Netpay:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="netpay" value="{{ old('netpay') }}" class="form-control" required placeholder="Enter Net Pay:">
+                                        {{ $payroll->netpay }}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Payroll Monthly:<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="payroll_monthly" value="{{ old('payroll_monthly') }}" class="form-control" required placeholder="Enter Payroll Monthly:">
+                                        {{ $payroll->payroll_monthly }}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card-footer">
                                 <a href="{{ url('admin/payroll') }}" class="btn btn-default">Back</a>
-                                <button type="submit" class="btn btn-primary float-right">Submit</button>
                             </div>
                         </form>
                     </div>

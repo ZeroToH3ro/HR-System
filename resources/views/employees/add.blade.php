@@ -102,11 +102,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Image Profile<span style="color: red">*</span></label>
                                     <div class="col-sm-10">
-                                        @if (!empty($getRecord->profile_image))
-                                            @if (file_exists(public_path('images/profile/'.$getRecord->profile_image)))
-                                                <img src="{{ asset('images/profile/'.$getRecord->profile_image) }}" style="width: 80px; height:80px" alt="avatar">
-                                            @endif
-                                        @endif
+                                        <input type="file" name="profile_image"  class="form-control">
                                     </div>
                                 </div>
 
@@ -129,6 +125,18 @@
                                             <option value="">Department Name</option>
                                             @foreach ($getDepartments as $item)
                                                 <option value="{{ $item->id }}">{{ $item->department_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Position Name <span style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select name="position_id" class="form-control" required>
+                                            <option value="">Position Name</option>
+                                            @foreach ($getPositions as $item)
+                                                <option value="{{ $item->id }}">{{ $item->position_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

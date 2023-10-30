@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Manager;
+use App\Models\Position;
 use App\Models\User;
 use App\Models\Job;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class EmployeesController extends Controller
         $data['getJobs'] = Job::get();
         $data['getManagers'] = Manager::get();
         $data['getDepartments'] = Department::get();
+        $data['getPositions'] = Position::get();
 
         return view('employees.add', $data);
     }
@@ -36,7 +38,8 @@ class EmployeesController extends Controller
             'salary' => 'required',
             'commission_pct' => 'required',
             'manager_id' => 'required',
-            'department_id' => 'required'
+            'department_id' => 'required',
+            'position_id' => 'required'
         ]);
 
         $user = new User;
@@ -50,6 +53,7 @@ class EmployeesController extends Controller
         $user->manager_id = trim($request->manager_id);
         $user->department_id = trim($request->department_id);
         $user->job_id = trim($request->job_id);
+        $user->position_id = trim($request->position_id);
         $user->is_role = 0;
 
         if (!empty($request->file('profile_image'))) {
@@ -61,8 +65,11 @@ class EmployeesController extends Controller
             $user->profile_image = $fileName;
         }
 
-        $user->save();
-        return redirect('admin/employees')->with('success', 'Employees successfully register');
+        if ($user->save()) {
+            return redirect('admin/employees')->with('success', 'Employees successfully register');
+        } else {
+            return redirect('admin/employees')->with('error', 'Employees save fail');
+        }
     }
 
     public function view($id)
@@ -78,6 +85,7 @@ class EmployeesController extends Controller
         $data['getJobs'] = Job::get();
         $data['getManagers'] = Manager::get();
         $data['getDepartments'] = Department::get();
+        $data['getPositions'] = Position::get();
 
         return view('employees.edit', $data);
     }
@@ -99,6 +107,8 @@ class EmployeesController extends Controller
         $user->manager_id = trim($request->manager_id);
         $user->department_id = trim($request->department_id);
         $user->job_id = trim($request->job_id);
+        $user->position_id = trim($request->position_id);
+
         if ($user->is_role == 1) {
             $user->is_role = 1;
         } else {
