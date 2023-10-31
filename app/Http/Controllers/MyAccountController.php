@@ -79,6 +79,6 @@ class MyAccountController extends Controller
         }
         $user->save();
 
-        return redirect('employee/my_account')->with( 'success', 'My Account Successful Update');
+        return redirect('employee/my_account')->with('success', 'My Account Successful Update');
     }
 }

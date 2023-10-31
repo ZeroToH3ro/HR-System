@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EmployeesNewCreateMail;
 use App\Models\Department;
 use App\Models\Manager;
 use App\Models\Position;
 use App\Models\User;
 use App\Models\Job;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class EmployeesController extends Controller
@@ -68,6 +72,8 @@ class EmployeesController extends Controller
             $user->profile_image = $fileName;
         }
 
+        Mail::to($user->email)->send(new EmployeesNewCreateMail($user));
+
         if ($user->save()) {
             return redirect('admin/employees')->with('success', 'Employees successfully register');
         } else {
@@ -111,6 +117,7 @@ class EmployeesController extends Controller
         $user->department_id = trim($request->department_id);
         $user->job_id = trim($request->job_id);
         $user->position_id = trim($request->position_id);
+        $user->interview = trim($request->interview);
 
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);

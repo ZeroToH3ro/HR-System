@@ -172,22 +172,30 @@
     @endif
 
     @if (Auth::User()->is_role == '0')
-    <li class="nav-item">
-        <a href="{{ url('employee/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
-          <p>
-            Dashboard
-          </p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url('employee/my_account') }}" class="nav-link @if(Request::segment(2) == 'my_account') active @endif">
-          <i class="nav-icon fa fa-cog"></i>
-          <p>
-            Account
-          </p>
-        </a>
-      </li>
+        <li class="nav-item">
+            <a href="{{ url('employee/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+                Dashboard
+            </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('employee/my_account') }}" class="nav-link @if(Request::segment(2) == 'my_account') active @endif">
+            <i class="nav-icon fa fa-cog"></i>
+            <p>
+                Account
+            </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('employee/interview') }}" class="nav-link @if(Request::segment(2) == 'interview') active @endif">
+            <i class="nav-icon fa fa-solid fa-hippo"></i>
+            <p>
+                Interview
+            </p>
+            </a>
+        </li>
     @endif
     </ul>
     </nav>

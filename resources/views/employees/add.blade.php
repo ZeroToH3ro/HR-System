@@ -113,7 +113,7 @@
                                         <input type="file" name="profile_image"  class="form-control">
                                     </div>
                                 </div>
-
+                                
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Manager Name <span style="color: red">*</span></label>
                                     <div class="col-sm-10">

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPasswordMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -20,6 +22,23 @@ class AuthController extends Controller
         return view('forgot-password');
     }
 
+    public function forgot_password_post(Request $request)
+    {
+        $count = User::where('email', '=', $request->email)->count();
+        if ($count > 0) {
+            $user = User::where('email', '=', $request->email)->first();
+            $random_pass = rand(11111111, 99999999);
+            $user->password = Hash::make($random_pass);
+            $user->save();
+
+            $user->password = $random_pass;
+            Mail::to($user->email)->send(new ForgotPasswordMail($user));
+
+            return redirect()->back()->with('success', 'Plase check your email');
+        } else {
+            return redirect()->back()->with('error', 'Email Not Found');
+        }
+    }
     public function register()
     {
         return view('register');

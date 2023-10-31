@@ -44,6 +44,20 @@
 
                             <div class="card-body">
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Interview<span style="color: red">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select name="interview" class="form-control" required>
+                                            <option value="">Status</option>
+                                            <option {{ ($getRecord->interview == '0') ? 'selected' : '' }} value="0">Cancle</option>
+                                            <option {{ ($getRecord->interview == '1') ? 'selected' : '' }} value="1">Pending</option>
+                                            <option {{ ($getRecord->interview == '2') ? 'selected' : '' }} value="2">Pass</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Last Name</label>
                                     <div class="col-sm-10">
                                         <input type="text" value="{{ $getRecord->last_name }}" name="last_name" class="form-control" placeholder="Enter Last Name">

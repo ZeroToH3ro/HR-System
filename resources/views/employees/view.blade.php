@@ -60,6 +60,19 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-lable">Interview</label>
+                                    <div class="col-sm-10">
+                                        @if ($getRecord->interview == '0')
+                                            Cancle
+                                        @elseif ($getRecord->interview == '1')
+                                            Pending
+                                        @elseif ($getRecord->interview == '2')
+                                            Pass
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-lable">Email</label>
                                     <div class="col-sm-10">
                                         {{ $getRecord->email }}

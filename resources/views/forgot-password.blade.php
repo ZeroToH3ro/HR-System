@@ -24,7 +24,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Forgot Password</p>
 
-      <form action="{{ url('register-post') }}" method="post">
+      <form action="{{ url('forgot-password') }}" method="post">
         {{ csrf_field() }}
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email" name="email">
